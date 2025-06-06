@@ -18,5 +18,5 @@ Desplegar Amazon EKS cluster con Terraform
 ```
 
 
-## Notes
+## Notas
 ArgoCD default username: admin
