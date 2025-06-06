@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: webapp-color-qa
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/josefloressv/uca_gitops
+    targetRevision: HEAD
+    path: helm/webapp-color/
+    helm:
+      parameters:
+      - name: "environment"
+        value: "qa"
+      - name: "appConfig.bgColor"
+        value: "lightyellow"
+      - name: "appConfig.textColor"
+        value: "darkblue"
+      - name: "appConfig.message"
+        value: "Container Day UCA! QA environment"
+      - name: "deployment.image.tag"
+        value: "1.1.2"
+      - name: "deployment.replicaCount"
+        value: "5"
+      - name: "service.type"
+        value: "LoadBalancer"
+      - name: "service.port"
+        value: "8080"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: qa
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true  
+    automated:
+      prune: true  # Specifies if resources should be pruned during auto-syncing ( false by default ).
+      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
