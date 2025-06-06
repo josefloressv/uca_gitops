@@ -1,12 +1,15 @@
 name: webapp-color
 environment: dev
+appConfig:
+  bgColor: "#FF5733" # Default background color
+  textColor: "#FFFFFF" # Default text color
+  message: "Welcome to the Web App!" # Default message
 deployment:
   replicaCount: 1
   image:
     repository: josefloressv/webapp-color
     # Overrides the image tag whose default is the chart appVersion.
-    tag: ""
-
+    tag: "latest"
 service:
   type: LoadBalancer
   port: 8080

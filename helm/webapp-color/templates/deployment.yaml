@@ -17,6 +17,10 @@ spec:
       containers:
       - image: {{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag | default "latest" }}
         name: {{ .Release.Name }}-pod
-        envFrom:
-         - configMapRef:
-                name: {{ .Release.Name }}-config
+        env:
+        - name: BG_COLOR
+          value: {{ .Values.appConfig.bgColor | quote }}
+        - name: TEXT_COLOR
+          value: {{ .Values.appConfig.textColor | quote }}
+        - name: MESSAGE
+          value: {{ .Values.appConfig.message | quote }}
