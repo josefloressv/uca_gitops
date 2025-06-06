@@ -13,6 +13,12 @@ spec:
       parameters:
       - name: "environment"
         value: "dev"
+      - name: "appConfig.bgColor"
+        value: "lightblue"
+      - name: "appConfig.textColor"
+        value: "darkblue"
+      - name: "appConfig.message"
+        value: "Container Day UCA! dev environment"
       - name: "deployment.image.tag"
         value: "latest"
       - name: "deployment.replicaCount"
